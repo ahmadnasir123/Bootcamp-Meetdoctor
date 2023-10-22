@@ -28,4 +28,18 @@ class RoleUser extends Model
         'deleted_at',
     ];
 
+    // one to many relationship
+    public function role()
+    {
+        // 3 parameter (path model , field foreign key, primary key from table hasMany relationship/hasOne relationship) 
+        return $this->belongsTo('App\Models\MaangementAccess\Role', 'role_id', 'id');
+    }
+
+    // one to many relationship
+    public function user()
+    {
+        // 3 parameter (path model , field foreign key, primary key from table hasMany relationship/hasOne relationship) 
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    }
+
 }

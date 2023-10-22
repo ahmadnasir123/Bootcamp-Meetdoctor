@@ -34,4 +34,11 @@ class PermissionRole extends Model
         // 3 parameter (path model , field foreign key, primary key from table hasMany relationship/hasOne relationship) 
         return $this->belongsTo('App\Models\MaangementAccess\Permission', 'permission_id', 'id');
     }
+
+    // one to many relationship
+    public function role()
+    {
+        // 3 parameter (path model , field foreign key, primary key from table hasMany relationship/hasOne relationship) 
+        return $this->belongsTo('App\Models\MaangementAccess\Role', 'role_id', 'id');
+    }
 }

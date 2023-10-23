@@ -14,6 +14,7 @@ class UpdateConfigPaymentRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // Create middleware from kernel at here
         return true;
     }
 

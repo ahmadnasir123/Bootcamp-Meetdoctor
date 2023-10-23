@@ -7,6 +7,8 @@ use App\Models\MasterData\Consultation;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Request;
 
+use Illuminate\Validation\Rule;
+
 class UpdateConsultationRequest extends FormRequest
 {
     /**
@@ -26,7 +28,7 @@ class UpdateConsultationRequest extends FormRequest
     {
         return [
             'name' => [
-                'required', 'string', 'max:255',
+                'required', 'string', 'max:255', Rule::unique('consultation')->ignore($this->consultation),
             ],
         ];
     }

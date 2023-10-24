@@ -19,6 +19,7 @@ use App\Http\Controllers\Frontsite\AppointmentController;
 
 Route::resource('/', LandingController::class);
 
+// route for frontsite
 Route::group(['middleware' => ['auth:sanctum','verified']], function () {
     // appointment page
     Route::resource('appointment', AppointmentController::class);
@@ -27,6 +28,7 @@ Route::group(['middleware' => ['auth:sanctum','verified']], function () {
     Route::resource('payment', PaymentController::class);
 });
 
+// route for backsite
 Route::group(['prefix' => 'backsite', 'as', 'backsite', 'middleware' => ['auth:sanctum',
 'verified']], function () {
 

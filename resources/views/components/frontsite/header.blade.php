@@ -5,9 +5,8 @@
             <div class="flex justify-between flex-auto">
 
                 <!-- Logo Brand -->
-            <a href="{{ route('index') }}" class="flex items-center flex-shrink-0">
-                    <img class="w-auto h-12 lg:h-16" 
-                    src="{{ asset('assets/frontsite/images/logo.png') }}" 
+                <a href="{{ route('index') }}" class="flex items-center flex-shrink-0">
+                    <img class="w-auto h-12 lg:h-16" src="{{ asset('assets/frontsite/images/logo.png') }}"
                         alt="Meet Doctor Logo" />
                 </a>
 
@@ -23,11 +22,13 @@
                   "text-[#1E2B4F] hover:text-gray-500 inline-flex 
                   items-center px-1 pt-1 text-lg font-medium"
              -->
-                    <a href="{{ route('index') }}"
-                        class="text-[#1E2B4F] relative after:absolute after:content-[''] after:border-b-2 after:border-[#0D63F5] after:w-8/12 after:-translate-x-1/2 after:bottom-3 after:left-1/2 font-semibold inline-flex items-center px-1 text-lg">
+                    <a href="{{ route('index') }}" class="text-[#1E2B4F] relative {{ request()->is('/') ? "
+                        after:absolute after:content-[''] after:border-b-2 after:border-[#0D63F5] after:w-8/12
+                        after:-translate-x-1/2 after:bottom-3 after:left-1/2 font-semibold inline-flex items-center px-1
+                        text-lg" : "hover:text-gray-500 inline-flex items-center px-1 pt-1 text-lg font-medium" }} ">
                         Home
                     </a>
-                    <a href="#"
+                    <a href=" #"
                         class="text-[#1E2B4F] relative hover:text-gray-500 inline-flex items-center px-1 pt-1 text-lg font-medium">
                         Featured
                     </a>

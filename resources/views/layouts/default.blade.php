@@ -20,8 +20,7 @@
         @include('components.frontsite.footer')
 
         @stack('before-script')
-        
-        @include('includes.frontsite.script')
+            @include('includes.frontsite.script')
         @stack('after-script')
 
         {{-- Modals --}}

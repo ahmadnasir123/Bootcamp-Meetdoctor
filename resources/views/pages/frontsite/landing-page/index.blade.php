@@ -161,7 +161,7 @@
                         </div>
                     </a>
         
-                    <a href="src/pages/subject-consultation.html" class="group">
+                    <a href="{{ route('appointment.index') }}" class="group">
                         <div class="relative z-10 w-full h-[350px] rounded-2xl overflow-hidden">
                             <img src="{{ asset('/assets/frontsite/images/doctor-2.png') }}"
                                 class="object-cover object-center w-full h-full bg-center bg-no-repeat" alt="Doctor 1">
@@ -182,7 +182,7 @@
                         </div>
                     </a>
         
-                    <a href="src/pages/subject-consultation.html" class="group">
+                    <a href="{{ route('appointment.index') }}" class="group">
                         <div class="relative z-10 w-full h-[350px] rounded-2xl overflow-hidden">
                             <img src="{{ asset('/assets/frontsite/images/doctor-3.png') }}"
                                 class="object-cover object-center w-full h-full bg-center bg-no-repeat" alt="Doctor 1">
@@ -203,7 +203,7 @@
                         </div>
                     </a>
         
-                    <a href="src/pages/subject-consultation.html" class="group">
+                    <a href="{{ route('appointment.index') }}" class="group">
                         <div class="relative z-10 w-full h-[350px] rounded-2xl overflow-hidden">
                             <img src="{{ asset('/assets/frontsite/images/doctor-4.png') }}"
                                 class="object-cover object-center w-full h-full bg-center bg-no-repeat" alt="Doctor 1">

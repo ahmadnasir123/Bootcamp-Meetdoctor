@@ -38,7 +38,7 @@
                                 placeholder="Email Address" value="{{ old('email') }}" required autofocus />
 
                             @if($errors->has('email'))
-                            <p class="mb-3 text-sm text-red-500">{{ $errors->first('email') }}</p>
+                             <p class="mb-3 text-sm text-red-500">{{ $errors->first('email') }}</p>
                             @endif
                         </label>
 

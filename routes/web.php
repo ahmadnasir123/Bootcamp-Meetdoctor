@@ -38,7 +38,6 @@ Route::group(['prefix' => 'backsite', 'as', 'backsite', 'middleware' => [
     'verified'
 ]], function () {
 
-
     // dashboard 
     Route::resource('dashboard', DashboardController::class);
 });

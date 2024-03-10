@@ -24,6 +24,8 @@
 
     {{-- @include('sweetalert::alert') --}}
 
+    @include('sweetalert::alert')
+
     @include('components.backsite.header')
     @include('components.backsite.menu')
     @yield('content')

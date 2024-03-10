@@ -1,35 +1,51 @@
 <?php
 
-namespace App\Http\Controllers\Frontsite;
+namespace App\Http\Controllers\Backsite;
 
 use App\Http\Controllers\Controller;
+use App\Models\MasterData\Specialist;
 use Illuminate\Http\Request;
 
 // use library here
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
+// use request
+use App\Http\Requests\Specialist\StoreSpecialistRequest;
+use App\Http\Requests\Specialist\UpdateSpecialistRequest;
+
 // user everything here
 // use Gate;
 use Auth;
 
 // model here
-use App\Models\User;
-use App\Models\Operational\Doctor;
-use App\Models\MastterData\Specialist;
+use App\Models\MasterData\Specialistic;
 
-// thirdparty packages here
-
-class LandingController extends Controller
+class SpecialistController extends Controller
 {
+
+    /**
+     * create a new controller instance
+     *
+     * @return void
+     */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 
     /**
      * Display a listing of the resource.
      */
-    
     public function index()
     {
-        return view('pages.frontsite.landing-page.index');
+        $specialist = Specialist::orderBy('created_at', 'DESC')->get();
+
+        dd($specialist);
+
+        return view('pages.backsite.master-data.specialist.index');
     }
 
     /**
@@ -43,9 +59,15 @@ class LandingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreSpecialistRequest $request)
     {
-        return abort(404);
+        // get all request from fronsite
+        $data = $request->all();
+
+        // store to database
+        $specialist = Specialist::create($data);
+
+        // return response
     }
 
     /**
@@ -79,7 +101,4 @@ class LandingController extends Controller
     {
         return abort(404);
     }
-
-    // custom functions here
-
 }

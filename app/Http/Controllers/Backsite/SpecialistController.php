@@ -43,8 +43,7 @@ class SpecialistController extends Controller
     {
         $specialist = Specialist::orderBy('created_at', 'DESC')->get();
 
-        dd($specialist);
-
+        // dd($specialist);
         return view('pages.backsite.master-data.specialist.index');
     }
 
@@ -68,37 +67,51 @@ class SpecialistController extends Controller
         $specialist = Specialist::create($data);
 
         // return response
+        alert()->success('Success Message', 'Successfully added new specialist');
+        return redirect()->route('backsite.specialist.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Specialist $specialist)
     {
-        return abort(404);
+
+        return view('pages.backsite.master-data.specialist.show', compact('specialist'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Specialist $specialist)
     {
-        return abort(404);
+
+        return view('pages.backsite.master-data.specialist.edit', compact('specialist'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateSpecialistRequest $request, Specialist $specialist)
     {
-        return abort(404);
+        // get all request from fronsite
+        $data = $request->all();
+
+        // update to database
+        $specialist->update($data);
+
+        alert()->success('Success Message', 'Successfully updated specialist');
+        return redirect()->route('backsite.specialist.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Specialist $specialist)
     {
-        return abort(404);
+        $specialist->delete();
+
+        alert()->success('Success Message', 'Successfully deleted specialist');
+        return back();
     }
 }

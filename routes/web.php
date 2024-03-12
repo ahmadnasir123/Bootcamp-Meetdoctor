@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontsite\AppointmentController;
 
 // backsite
 use App\Http\Controllers\Backsite\DashboardController;
+use App\Http\Controllers\Backsite\DoctorController;
 use App\Http\Controllers\Backsite\HospitalPatientController;
 use App\Http\Controllers\Backsite\PermissionController;
 use App\Http\Controllers\Backsite\RoleController;
@@ -76,6 +77,9 @@ Route::group(['prefix' => 'backsite', 'as' => 'backsite.', 'middleware' => ['aut
 
     // transaction
     Route::resource('transaction', TransactionController::class);
+
+    // doctor
+    Route::resource('doctor', DoctorController::class);
 });
 
 // Route::get('/', function () {

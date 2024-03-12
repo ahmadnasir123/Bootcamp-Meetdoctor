@@ -5,6 +5,20 @@ namespace App\Http\Controllers\Backsite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+// use library here
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+
+// user everything here
+// use Gate;
+use Auth;
+
+// model here
+use App\Models\ManagementAccess\Permission;
+use App\Models\ManagementAccess\Role;
+use App\Models\ManagementAccess\PermissionRole;
+use App\Models\ManagementAccess\RoleUser;
+
 class PermissionController extends Controller
 {
 
@@ -25,7 +39,9 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        return view('pages.backsite.management-access.permission.index');
+        $permission = Permission::orderBy('id', 'asc')->get();
+
+        return view('pages.backsite.management-access.permission.index', compact('permission'));
     }
 
     /**
@@ -33,7 +49,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return abort('440');
+        return abort(440);
     }
 
     /**
@@ -41,7 +57,7 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        return abort('440');
+        return abort(440);
     }
 
     /**
@@ -49,7 +65,7 @@ class PermissionController extends Controller
      */
     public function show(string $id)
     {
-        return abort('440');
+        return abort(440);
     }
 
     /**
@@ -57,7 +73,7 @@ class PermissionController extends Controller
      */
     public function edit(string $id)
     {
-        return abort('440');
+        return abort(440);
     }
 
     /**
@@ -65,7 +81,7 @@ class PermissionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return abort('440');
+        return abort(440);
     }
 
     /**
@@ -73,6 +89,6 @@ class PermissionController extends Controller
      */
     public function destroy(string $id)
     {
-        return abort('440');
+        return abort(440);
     }
 }

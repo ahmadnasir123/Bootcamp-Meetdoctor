@@ -5,6 +5,21 @@ namespace App\Http\Controllers\Backsite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+// use library here
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+
+// user request 
+use App\Http\Requests\Consultation\StoreConsultationRequest;
+use App\Http\Requests\Consultation\UpdateConsultationRequest;
+
+// user everything here
+// use Gate;
+use Auth;
+
+// model here
+use App\Models\MasterData\Consultation;
+
 class ConsultationController extends Controller
 {
 
@@ -25,7 +40,9 @@ class ConsultationController extends Controller
      */
     public function index()
     {
-        return view('pages.backsite.master-data.consultation.index');
+        $consulation = Consultation::orderBy('created_at', 'desc')->get();
+
+        return view('pages.backsite.master-data.consultation.index', compact('consulation'));
     }
 
     /**
@@ -33,23 +50,30 @@ class ConsultationController extends Controller
      */
     public function create()
     {
-        return abort('404');
+        return abort(404);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreConsultationRequest $request)
     {
-        return abort('404');
+        // get all request from fronsite
+        $data = $request->all();
+
+        // store to database
+        $consulation = Consultation::create($data);
+
+        alert()->success('Success Message', 'Successfully added new consulation');
+        return redirect()->route('backsite.consultation.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Consultation $consulation)
     {
-        return abort('404');
+        return view('pages.backsite.master-data.consultation.show', compact('consulation'));
     }
 
     /**
@@ -57,22 +81,30 @@ class ConsultationController extends Controller
      */
     public function edit(string $id)
     {
-        return abort('404');
+        return abort(404);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateConsultationRequest $request, Consultation $consulation)
     {
-        return abort('404');
+        $data = $request->all();
+
+        $consulation->update($data);
+
+        alert()->success('Success Message', 'Successfully updated consulation');
+        return redirect()->route('backsite.consultation.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Consultation $consulation)
     {
-        return abort('404');
+        $consulation->forceDelete();
+
+        alert()->success('Success Message', 'Successfully deleted consulation');
+        return back();
     }
 }

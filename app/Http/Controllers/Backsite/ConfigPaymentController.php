@@ -3,7 +3,19 @@
 namespace App\Http\Controllers\Backsite;
 
 use App\Http\Controllers\Controller;
+use App\Models\MasterData\ConfigPayment;
 use Illuminate\Http\Request;
+
+// use library here
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+
+// request 
+use App\Http\Requests\ConfigPayment\UpdateConfigPaymentRequest;
+
+// user everything here
+// use Gate;
+use Auth;
 
 class ConfigPaymentController extends Controller
 {
@@ -25,7 +37,10 @@ class ConfigPaymentController extends Controller
      */
     public function index()
     {
-        return view('pages.backsite.master-data.config-payment.index');
+
+        $config_payment = ConfigPayment::all();
+
+        return view('pages.backsite.master-data.config-payment.index', compact('config_payment'));
     }
 
     /**
@@ -33,7 +48,7 @@ class ConfigPaymentController extends Controller
      */
     public function create()
     {
-        return abort('404');
+        return abort(404);
     }
 
     /**
@@ -41,7 +56,7 @@ class ConfigPaymentController extends Controller
      */
     public function store(Request $request)
     {
-        return abort('404');
+        return abort(404);
     }
 
     /**
@@ -49,23 +64,29 @@ class ConfigPaymentController extends Controller
      */
     public function show(string $id)
     {
-        return abort('404');
+        return abort(404);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(ConfigPayment $config_payment)
     {
-        return abort('404');
+        return view('pages.backsite.master-data.config-payment.edit', compact('config_payment'));
     }
+   
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateConfigPaymentRequest $request, ConfigPayment $config_payment)
     {
-        return abort('404');
+        $data = $request->all();
+
+        $config_payment->update($data);
+
+        alert()->success('Success Message', 'Successfully updated config payment');
+        return redirect()->route('backsite.config_payment.index');
     }
 
     /**
@@ -73,6 +94,6 @@ class ConfigPaymentController extends Controller
      */
     public function destroy(string $id)
     {
-        return abort('404');
+        return abort(404);
     }
 }

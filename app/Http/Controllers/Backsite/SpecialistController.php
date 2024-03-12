@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backsite;
 
 use App\Http\Controllers\Controller;
-use App\Models\MasterData\Specialist;
+
 use Illuminate\Http\Request;
 
 // use library here
@@ -19,7 +19,7 @@ use App\Http\Requests\Specialist\UpdateSpecialistRequest;
 use Auth;
 
 // model here
-use App\Models\MasterData\Specialistic;
+use App\Models\MasterData\Specialist;
 
 class SpecialistController extends Controller
 {
@@ -43,8 +43,7 @@ class SpecialistController extends Controller
     {
         $specialist = Specialist::orderBy('created_at', 'DESC')->get();
 
-        // dd($specialist);
-        return view('pages.backsite.master-data.specialist.index');
+        return view('pages.backsite.master-data.specialist.index', compact('specialist'));
     }
 
     /**

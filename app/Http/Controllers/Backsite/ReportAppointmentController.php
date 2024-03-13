@@ -2,30 +2,34 @@
 
 namespace App\Http\Controllers\Backsite;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class TransactionController extends Controller
+// use library here
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
+
+// use everything here
+use Gate;
+use Auth;
+
+// use model here
+use App\Models\Operational\Appointment;
+use App\Models\Operational\Doctor;
+use App\Models\Operational\Transaction;
+use App\Models\User;
+use App\Models\MasterData\Consultation;
+
+class ReportAppointmentController extends Controller
 {
-
-    /**
-     * create a new controller instance
-     *
-     * @return void
-     */
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('pages.backsite.operational.transaction.index');
+        $appointment = Appointment::orderBy('created_at', 'desc')->get();
+
+        return view('pages.backsite.operational.appointment.index', compact('appointment'));
     }
 
     /**
@@ -33,7 +37,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        return abort('404');
+        return abort(404);
     }
 
     /**
@@ -41,7 +45,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        return abort('404');
+        return abort(404);
     }
 
     /**
@@ -49,7 +53,7 @@ class TransactionController extends Controller
      */
     public function show(string $id)
     {
-        return abort('404');
+        return abort(404);
     }
 
     /**
@@ -57,7 +61,7 @@ class TransactionController extends Controller
      */
     public function edit(string $id)
     {
-        return abort('404');
+        return abort(404);
     }
 
     /**
@@ -65,7 +69,7 @@ class TransactionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return abort('404');
+        return abort(404);
     }
 
     /**
@@ -73,6 +77,6 @@ class TransactionController extends Controller
      */
     public function destroy(string $id)
     {
-        return abort('404');
+        return abort(404);
     }
 }

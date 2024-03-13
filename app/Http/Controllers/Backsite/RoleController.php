@@ -78,31 +78,45 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        $role->load('permissions');
+        // need more notes here
+        $role->load('permission');
+
         return view('pages.backsite.management-access.role.show', compact('role'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Role $role)
     {
-        
+        // need more notes here
+        $permission = Permission::all();
+        $role->load('permission');
+
+        return view('pages.backsite.management-access.role.edit', compact('permission', 'role'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRoleRequest $request, Role $role)
     {
-        return abort('404');
+
+        $role->update($request->all());
+        $role->permission()->sync($request->input('permission', []));
+
+        alert()->success('Success Message', 'Successfully updated role');
+        return redirect()->route('backsite.role.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Role $role)
     {
-        return abort('404');
+        $role->forceDelete();
+
+        alert()->success('Success Message', 'Successfully deleted role');
+        return back();
     }
 }

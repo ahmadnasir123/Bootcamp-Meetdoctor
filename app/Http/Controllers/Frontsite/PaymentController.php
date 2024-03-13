@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers\Frontsite;
 
-use App\Http\Controllers\Controller;
+use Auth;
 
 // use library here
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\Response;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 // user everything here
 // use Gate;
-use Auth;
+use App\Models\Operational\Doctor;
 
 // model here
-use App\Models\User;
-use App\Models\Operational\Doctor;
+use App\Http\Controllers\Controller;
+use App\Models\MastterData\Specialist;
 use App\Models\Operational\Appointment;
 use App\Models\Operational\Transaction;
+use Illuminate\Support\Facades\Storage;
 use App\Models\MastterData\Consultation;
-use App\Models\MastterData\Specialist;
 use App\Models\MastterData\ConfigPayment;
+use Symfony\Component\HttpFoundation\Response;
 
 
 // thirdparty packages here
@@ -90,6 +91,6 @@ class PaymentController extends Controller
      */
     public function destroy(string $id)
     {
-        return abort(404);  
+        return abort(404);
     }
 }

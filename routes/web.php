@@ -18,7 +18,6 @@ use App\Http\Controllers\Backsite\ReportAppointmentController;
 use App\Http\Controllers\Backsite\ReportTransactionController;
 use App\Http\Controllers\Backsite\RoleController;
 use App\Http\Controllers\Backsite\SpecialistController;
-use App\Http\Controllers\Backsite\TransactionController;
 use App\Http\Controllers\Backsite\TypeUserController;
 use App\Http\Controllers\Backsite\UserController;
 

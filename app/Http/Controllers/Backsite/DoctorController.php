@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 // use library here
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Gate;
 
 // use request
 use App\Http\Requests\Doctor\StoreDoctorRequest;
@@ -20,6 +21,7 @@ use Auth;
 // model here
 use App\Models\Operational\Doctor;
 use App\Models\MasterData\Specialist;
+
 
 class DoctorController extends Controller
 {
@@ -79,6 +81,9 @@ class DoctorController extends Controller
      */
     public function show(Doctor $doctor)
     {
+
+        abort_if(Gate::denies('doctor_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return view('pages.backsite.operational.doctor.show', compact('doctor'));
     }
 
@@ -87,6 +92,7 @@ class DoctorController extends Controller
      */
     public function edit(Doctor $doctor)
     {
+        abort_if(Gate::denies('doctor_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         // for select2 = ascending a to z
         $specialist = Specialist::orderBy('name', 'asc')->get();
 
@@ -118,5 +124,4 @@ class DoctorController extends Controller
         alert()->success('Success Message', 'Successfully deleted doctor');
         return back();
     }
-   
 }

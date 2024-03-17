@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\Doctor;
 
-use App\Models\Operational\Doctor;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
+use App\Models\Operational\Doctor;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -14,6 +16,7 @@ class StoreDoctorRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        abort_if(Gate::denies('doctor_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return true;
     }
 
@@ -26,7 +29,7 @@ class StoreDoctorRequest extends FormRequest
     {
         return [
             'specialist_id' => [
-                'required', 'integer', 
+                'required', 'integer',
             ],
             'name' => [
                 'required', 'string', 'max:255',

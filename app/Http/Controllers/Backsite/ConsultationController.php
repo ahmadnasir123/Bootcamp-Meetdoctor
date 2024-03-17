@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 // use library here
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 // user request 
 use App\Http\Requests\Consultation\StoreConsultationRequest;
@@ -15,7 +16,7 @@ use App\Http\Requests\Consultation\UpdateConsultationRequest;
 
 // user everything here
 // use Gate;
-use Auth;
+// use Auth;
 
 // model here
 use App\Models\MasterData\Consultation;

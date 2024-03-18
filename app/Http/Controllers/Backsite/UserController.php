@@ -3,7 +3,29 @@
 namespace App\Http\Controllers\Backsite;
 
 use App\Http\Controllers\Controller;
+
+
+// use library here
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Response;
+
+// request
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
+
+// use everything here
+// use Gate;
+use Auth;
+
+// use model here
+use App\Models\User;
+use App\Models\ManagementAccess\DetailUser;
+use App\Models\ManagementAccess\Permission;
+use App\Models\ManagementAccess\Role;
+use App\Models\MasterData\TypeUser;
 
 class UserController extends Controller
 {

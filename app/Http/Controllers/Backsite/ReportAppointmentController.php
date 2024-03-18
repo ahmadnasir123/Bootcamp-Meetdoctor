@@ -8,9 +8,10 @@ use App\Http\Controllers\Controller;
 // use library here
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Gate;
 
 // use everything here
-use Gate;
+// use Gate;
 use Auth;
 
 // use model here
@@ -27,6 +28,8 @@ class ReportAppointmentController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('appointment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $appointment = Appointment::orderBy('created_at', 'desc')->get();
 
         return view('pages.backsite.operational.appointment.index', compact('appointment'));

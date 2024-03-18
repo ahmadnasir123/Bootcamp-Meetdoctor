@@ -6,6 +6,8 @@ use App\Models\ManagementAccess\Role;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Gate;
 
 // this rule only update requests
 use Illuminate\Validation\Rule;
@@ -17,6 +19,8 @@ class UpdateRoleRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        abort_if(Gate::denies('role_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return true;
     }
 

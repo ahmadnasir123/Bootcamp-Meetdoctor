@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 // user request 
 use App\Http\Requests\Consultation\StoreConsultationRequest;
@@ -41,6 +42,8 @@ class ConsultationController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('consultation_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $consulation = Consultation::orderBy('created_at', 'desc')->get();
 
         return view('pages.backsite.master-data.consultation.index', compact('consulation'));
@@ -74,16 +77,21 @@ class ConsultationController extends Controller
      */
     public function show(Consultation $consulation)
     {
+        abort_if(Gate::denies('consultation_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return view('pages.backsite.master-data.consultation.show', compact('consulation'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Consultation $consultation)
     {
-        return abort(404);
+        abort_if(Gate::denies('consultation_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return view('pages.backsite.master-data.consultation.edit', compact('consultation'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -103,6 +111,8 @@ class ConsultationController extends Controller
      */
     public function destroy(Consultation $consulation)
     {
+        abort_if(Gate::denies('consultation_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        
         $consulation->forceDelete();
 
         alert()->success('Success Message', 'Successfully deleted consulation');

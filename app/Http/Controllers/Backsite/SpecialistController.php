@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 // use library here
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Gate;
 
 // use request
 use App\Http\Requests\Specialist\StoreSpecialistRequest;
@@ -41,6 +42,8 @@ class SpecialistController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('specialist_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $specialist = Specialist::orderBy('created_at', 'DESC')->get();
 
         return view('pages.backsite.master-data.specialist.index', compact('specialist'));
@@ -75,6 +78,7 @@ class SpecialistController extends Controller
      */
     public function show(Specialist $specialist)
     {
+        abort_if(Gate::denies('specialist_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('pages.backsite.master-data.specialist.show', compact('specialist'));
     }
@@ -84,6 +88,7 @@ class SpecialistController extends Controller
      */
     public function edit(Specialist $specialist)
     {
+        abort_if(Gate::denies('specialist_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('pages.backsite.master-data.specialist.edit', compact('specialist'));
     }
@@ -108,6 +113,8 @@ class SpecialistController extends Controller
      */
     public function destroy(Specialist $specialist)
     {
+        abort_if(Gate::denies('specialist_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        
         $specialist->delete();
 
         alert()->success('Success Message', 'Successfully deleted specialist');
